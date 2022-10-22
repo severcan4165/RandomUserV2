@@ -1,0 +1,30 @@
+.card{
+    margin-top: -10rem;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:50% ;
+    min-width:600px ;
+    background-color: lightgray;
+
+    .text{
+        margin-top: 2rem;
+        font-size: 2rem;
+    }
+    .hoverImages{
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+        .hoverImage{
+            width: 5rem;
+            height: 5rem;
+        }
+    }
+
+
+    
+}
+
