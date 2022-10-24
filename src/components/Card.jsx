@@ -11,6 +11,10 @@ import phone from "../assets/phone.svg";
 import woman from "../assets/woman.svg";
 
 const url = "https://randomuser.me/api/";
+const initialTable = [];
+let personData;
+let name;
+let person;
 const Card = () => {
   const [personInfo, setPersonInfo] = useState({});
   const [loading, setLoading] = useState(false);
@@ -18,37 +22,22 @@ const Card = () => {
     text1: "",
     text2: "",
   });
+  const [add, setAdd] = useState(initialTable);
 
   const apiFetcher = async () => {
     setLoading(true);
     try {
       const response = await axios(url);
-      const person = response.data.results[0];
-      const {
-        email,
-        gender,
-        phone,
-        dob: { age },
-        picture: { large: image },
-        name: { first, last },
-        location: { country },
-        login: { password },
-      } = person;
-      const name = `${first} ${last}`;
-      const personData = {
-        email,
-        gender,
-        name,
-        image,
-        age,
-        country,
-        phone,
-        password,
-      };
+      person = response.data.results[0];
+      const {email,gender,phone,dob: { age }, picture: { large: image }, name: { first, last },
+        location: { country },login: { password },} = person;
+      name = `${first} ${last}`;
+      personData = {email,gender,name,image,age,country,phone,password,};
+      
       setPersonInfo(personData);
       setHoverData({
         text1: "My name is",
-        text2: personData.fullname,
+        text2: personData.name,
       });
     } catch (error) {
       console.log(error);
@@ -65,6 +54,13 @@ const Card = () => {
     const { name } = e.target;
     setHoverData({ text1: `my ${name} is `, text2: personInfo[name] });
   };
+
+  const handleAdd = () => {
+    !!add.length < 1 && setAdd([...add, {firstname : personData.name, email : personData.email, phone : personData.phone}]);
+    
+(!add?.some((item) => item.firstname === personData.name) ? (setAdd([...add, {firstname : personData.name, email : personData.email, phone : personData.phone}])): alert("kullanıcı zaten var"))
+  }
+  
 
   return (
     <div className={cardStyle.card}>
@@ -122,6 +118,33 @@ const Card = () => {
           src={padlock}
           alt="password"
         />
+      </div>
+      <div className={cardStyle.butns}>
+        <button disabled = {loading ? true : false} className={cardStyle.butn} onClick={() => apiFetcher()}>{loading ? "Loading" : "New User"}</button>
+        <button onClick={handleAdd} className={cardStyle.butn}>Add User</button>
+      </div>
+      <div className={cardStyle.userTable}>
+      {!!add.length > 0 &&   <table className={cardStyle.table}>
+          <thead>
+          <tr>
+            <th>Firstname</th>
+            <th>Email</th>
+            <th>Phone</th>
+          </tr>
+          </thead>
+        
+          <tbody>
+
+             {add.map((item, index)=>{ 
+              return(
+                <tr key = {index} >
+                  <td>{item.firstname}</td>
+                  <td>{item.email}</td>
+                  <td>{item.phone}</td>
+                </tr>)})}
+           
+          </tbody>
+        </table>}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@
     width:50% ;
     min-width:600px ;
     background-color: lightgray;
+    height: auto;
 
     .text{
         margin-top: 2rem;
@@ -21,7 +22,52 @@
         .hoverImage{
             width: 5rem;
             height: 5rem;
+            cursor: pointer;
         }
+    }
+    .butns{
+        width: 80%;
+        margin-top: 5rem;
+        display: flex;
+        justify-content: space-around;
+
+        .butn{
+            border-radius: 0.6rem;
+            display: inline-block;
+            padding: 1rem 0;
+            width: 20rem;
+            height: 4.5rem;
+            font-size: 2rem;
+            background-color:#004a2fd6;
+        }
+        .butn:hover{
+            background-color: #048052d6;
+        }
+    }
+    .userTable{
+     
+        padding: 2rem 6rem 2rem 6rem ;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .table{
+            
+            width: 100%;
+            tr:nth-child(even) {
+                background-color: #D6EEEE;
+              }
+            th{
+                background-color: #D6EEEE;
+                padding: 0.3rem;
+                text-align: start;
+                font-size: 1.7rem;
+            }
+            td{
+                padding: 0.3rem;
+                font-size: 1.2rem;
+            }
+        }
+
     }
 
 
