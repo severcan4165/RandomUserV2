@@ -56,9 +56,10 @@ const Card = () => {
   };
 
   const handleAdd = () => {
-    !!add.length < 1 && setAdd([...add, {firstname : personData.name, email : personData.email, phone : personData.phone}]);
+    // !!add.length < 1 && setAdd([...add, {firstname : personData.name, email : personData.email, phone : personData.phone}]);
     
-(!add?.some((item) => item.firstname === personData.name) ? (setAdd([...add, {firstname : personData.name, email : personData.email, phone : personData.phone}])): alert("kullanıcı zaten var"))
+(!add.some((item) => item.firstname === personData.name) ?
+ (setAdd([...add, {firstname : personData.name, email :personData.email, phone : personData.phone}])): alert("kullanıcı zaten var"))
   }
   
 
@@ -120,11 +121,11 @@ const Card = () => {
         />
       </div>
       <div className={cardStyle.butns}>
-        <button disabled = {loading ? true : false} className={cardStyle.butn} onClick={() => apiFetcher()}>{loading ? "Loading" : "New User"}</button>
+        <button disabled = {loading} className={cardStyle.butn} onClick={() => apiFetcher()}>{loading ? "Loading" : "New User"}</button>
         <button onClick={handleAdd} className={cardStyle.butn}>Add User</button>
       </div>
       <div className={cardStyle.userTable}>
-      {!!add.length > 0 &&   <table className={cardStyle.table}>
+      {!!add.length &&   <table className={cardStyle.table}>
           <thead>
           <tr>
             <th>Firstname</th>
